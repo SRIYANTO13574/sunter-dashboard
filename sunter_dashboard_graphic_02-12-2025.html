@@ -1,0 +1,96 @@
+
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard Grafik – Situasi Sunter 2 Des 2025</title>
+<meta http-equiv="refresh" content="60">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+ body{font-family: Inter,Arial;background:#f5f7fb;margin:0;padding:0;color:#0f172a}
+ .container{max-width:1100px;margin:25px auto;padding:20px;background:#fff;border-radius:10px;
+            box-shadow:0 6px 24px rgba(0,0,0,0.08)}
+ h1{margin:0;font-size:22px}
+ .meta{font-size:13px;color:#475569;margin-bottom:20px}
+ .chart-box{margin:25px 0;padding:20px;background:#f8fafc;border-radius:10px;border:1px solid #e5e7eb}
+ h2{font-size:18px;margin-bottom:12px}
+ footer{margin-top:20px;font-size:12px;color:#64748b;text-align:center}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Dashboard Grafik – Situasi Sunter & Sekitarnya</h1>
+  <div class="meta">Update terakhir: 2 Desember 2025 – 21:28 WIB • Data: CCTV ISZ, FMS 22:00</div>
+
+  <div class="chart-box">
+    <h2>📈 Kecepatan Lalu Lintas per Zona (FMS 22:00)</h2>
+    <canvas id="trafficChart"></canvas>
+  </div>
+
+  <div class="chart-box">
+    <h2>🌊 Tinggi Muka Air – Kali Sunter & Sensor Jalan</h2>
+    <canvas id="waterChart"></canvas>
+  </div>
+
+  <div class="chart-box">
+    <h2>🔍 Indeks Risiko Keamanan</h2>
+    <canvas id="riskChart"></canvas>
+  </div>
+
+  <footer>Dashboard otomatis refresh setiap 60 detik • Sistem Monitoring ISZ Sunter</footer>
+</div>
+
+<script>
+// ---- TRAFFIC CHART ----
+new Chart(document.getElementById('trafficChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Zona 1', 'Zona 2', 'Zona 3'],
+    datasets: [{
+      label: 'Kecepatan Rata-rata (km/h)',
+      data: [38, 31, 27],
+      borderWidth: 1
+    }]
+  },
+  options: {responsive:true, scales:{y:{beginAtZero:true}}}
+});
+
+// ---- WATER LEVEL CHART ----
+new Chart(document.getElementById('waterChart'), {
+  type: 'line',
+  data: {
+    labels: ['Pagi', 'Siang', 'Sore', 'Malam'],
+    datasets: [{
+      label: 'Kali Sunter (cm)',
+      data: [225.3, 225.2, 225.1, 225.1],
+      tension: 0.4,
+      borderWidth: 2
+    },
+    {
+      label: 'Sensor Jalan (cm)',
+      data: [0,0,0,0],
+      tension: 0.4,
+      borderWidth: 2
+    }]
+  },
+  options: {responsive:true, scales:{y:{beginAtZero:true}}}
+});
+
+// ---- RISK CHART ----
+new Chart(document.getElementById('riskChart'), {
+  type: 'radar',
+  data: {
+    labels: ['3C', 'Tawuran', 'Narkoba', 'Genangan', 'Mobilitas Malam'],
+    datasets: [{
+      label: 'Indeks Risiko (0–10)',
+      data: [3,2,2,1,4],
+      borderWidth: 2
+    }]
+  },
+  options: {responsive:true, scales:{r:{beginAtZero:true, max:10}}}
+});
+</script>
+
+</body>
+</html>
